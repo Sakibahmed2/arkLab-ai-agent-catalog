@@ -1,11 +1,9 @@
-import React from "react";
+import HomePage from "@/components/page/HomePage";
 
-const HomePage = () => {
+export default async function Page() {
   return (
-    <div>
-      <h1 className="text-4xl font-semibold text-center">Hello</h1>
-    </div>
+    <main className="p-6 max-w-7xl mx-auto">
+      <HomePage />
+    </main>
   );
-};
-
-export default HomePage;
+}

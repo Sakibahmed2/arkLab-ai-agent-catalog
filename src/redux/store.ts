@@ -1,8 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
-import counterReducer from "@/redux/slice/counterSlice";
+import agentReducers from "@/redux/slice/agentSlice";
 
-export default configureStore({
+const store = configureStore({
   reducer: {
-    counter: counterReducer,
+    agents: agentReducers,
   },
 });
+
+export default store;
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+export type AppStore = typeof store;
