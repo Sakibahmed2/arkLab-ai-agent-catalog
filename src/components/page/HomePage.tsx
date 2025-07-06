@@ -7,7 +7,7 @@ import { useAppDispatch } from "@/redux/hooks";
 import { setAgents, setLoading } from "@/redux/slice/agentSlice";
 import { TAgents } from "@/types/global";
 import { motion } from "framer-motion";
-import { Bot, Sparkles } from "lucide-react";
+import { Bot } from "lucide-react";
 import { useEffect } from "react";
 import AgentGrid from "../AgentGrid";
 
@@ -29,6 +29,24 @@ const searchBarAnimation = {
     opacity: 1,
     y: 0,
     transition: { duration: 0.5, delay: 0.1 },
+  },
+};
+
+const filterPanelAnimation = {
+  initial: { opacity: 0, x: -20 },
+  animate: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.5, delay: 0.3 },
+  },
+};
+
+const agentInfoAnimation = {
+  initial: { opacity: 0, y: 20 },
+  animate: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, delay: 0.4 },
   },
 };
 
@@ -54,16 +72,14 @@ const HomePage = () => {
           animate="animate"
           className="text-center mb-12"
         >
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="relative">
-              <Bot className="w-12 h-12 text-primary" />
-              <Sparkles className="w-4 h-4 text-yellow-500 absolute -top-1 -right-1" />
-            </div>
-            <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+          <div className="flex items-center justify-center gap-3 mb-2 md:mb-4">
+            <Bot className="size-8 md:size-12 text-primary" />
+
+            <h1 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
               ArkLab AI Agents
             </h1>
           </div>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-sm md:text-xl text-muted-foreground max-w-2xl mx-auto">
             Discover powerful AI agents designed to transform your business
             operations across various industries and use cases.
           </p>
@@ -74,7 +90,7 @@ const HomePage = () => {
           variants={searchBarAnimation}
           initial="initial"
           animate="animate"
-          className="mb-8"
+          className="mb-8 "
         >
           <SearchBar />
         </motion.div>
@@ -83,10 +99,10 @@ const HomePage = () => {
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           {/* Filters Sidebar */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="lg:col-span-1"
+            variants={filterPanelAnimation}
+            initial="initial"
+            animate="animate"
+            className="lg:col-span-1 "
           >
             <div className="sticky top-8">
               {" "}
@@ -96,9 +112,9 @@ const HomePage = () => {
 
           {/* Agent Grid */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
+            variants={agentInfoAnimation}
+            initial="initial"
+            animate="animate"
             className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:col-span-3"
           >
             <AgentGrid />

@@ -27,7 +27,7 @@ export default function AgentCard({ agent, index }: AgentCardProps) {
       whileHover={{ y: -4, transition: { duration: 0.2 } }}
       className=""
     >
-      <Card className="h-full hover:shadow-lg transition-shadow duration-200 border-2 hover:border-primary/20">
+      <Card className="h-full hover:shadow-lg transition-shadow duration-200  hover:border-primary/20">
         <CardHeader>
           <div className="flex items-start justify-between gap-2">
             <div className="flex items-center gap-2 min-w-0 flex-1">
