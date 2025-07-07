@@ -57,3 +57,21 @@ npm run dev
 # or
 yarn dev
 ```
+
+---
+
+## 🔐 Google Auth
+
+- Library Used: `next-auth`
+- Auth Provider: `GoogleProvider` via `next-auth/providers/google`
+- Session Strategy: JWT
+- Custom Sign-in Page: `/login`
+
+---
+
+## Challenge faced
+
+- App Router Compatibility: Ensured API route was created at `src/app/api/auth/[...nextauth]/route.ts` using the new `NextResponse` handler.
+- Vercel Deployment Errors: Resolved `NO_SECRET` error by adding `NEXTAUTH_SECRET` to the Vercel dashboard.
+
+---
