@@ -3,13 +3,14 @@
 import FilterPanel from "@/components/FilterPanel";
 import SearchBar from "@/components/SearchBar";
 import agentData from "@/data/mock-agent.json";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { useAppDispatch } from "@/redux/hooks";
 import { setAgents, setLoading } from "@/redux/slice/agentSlice";
 import { TAgents } from "@/types/global";
 import { motion } from "framer-motion";
 import { Bot } from "lucide-react";
 import { useEffect } from "react";
 import AgentGrid from "../AgentGrid";
+import UserMenu from "../UserMenu";
 
 const headerAnimation = {
   initial: { opacity: 0, y: -100, scale: 0.8 },
@@ -50,11 +51,17 @@ const agentInfoAnimation = {
   },
 };
 
+const profileAnimation = {
+  initial: { opacity: 0, y: -40 },
+  animate: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 1, delay: 0.2 },
+  },
+};
+
 const HomePage = () => {
   const dispatch = useAppDispatch();
-  const { user } = useAppSelector((state) => state.auth);
-
-  console.log(user);
 
   useEffect(() => {
     dispatch(setLoading(true));
@@ -66,7 +73,15 @@ const HomePage = () => {
   }, [dispatch]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
+    <div className="min-h-screen border rounded-xl overflow-hidden">
+      <motion.div
+        variants={profileAnimation}
+        initial="initial"
+        animate="animate"
+        className="flex justify-end items-center m-4"
+      >
+        <UserMenu />
+      </motion.div>
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <motion.div
@@ -78,11 +93,11 @@ const HomePage = () => {
           <div className="flex items-center justify-center gap-3 mb-2 md:mb-4">
             <Bot className="size-8 md:size-12 text-primary" />
 
-            <h1 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+            <h1 className="text-3xl md:text-5xl font-bold text-primary">
               ArkLab AI Agents
             </h1>
           </div>
-          <p className="text-sm md:text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-sm md:text-xl text-zinc-500 max-w-2xl mx-auto">
             Discover powerful AI agents designed to transform your business
             operations across various industries and use cases.
           </p>
@@ -100,7 +115,7 @@ const HomePage = () => {
 
         {/* Main Content */}
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          {/* Filters Sidebar */}
+          {/* Filter sidebar */}
           <motion.div
             variants={filterPanelAnimation}
             initial="initial"
@@ -113,7 +128,7 @@ const HomePage = () => {
             </div>
           </motion.div>
 
-          {/* Agent Grid */}
+          {/* Agent cards */}
           <motion.div
             variants={agentInfoAnimation}
             initial="initial"

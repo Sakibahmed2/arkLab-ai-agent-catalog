@@ -1,7 +1,6 @@
 "use client";
 
-import { signOut } from "next-auth/react";
-import { useSelector } from "react-redux";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -11,9 +10,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { LogOut, User, Settings } from "lucide-react";
-import type { RootState } from "@/store/store";
+import { RootState } from "@/redux/store";
+import { LogOut } from "lucide-react";
+import { signOut } from "next-auth/react";
+import { useSelector } from "react-redux";
 
 export default function UserMenu() {
   const { user } = useSelector((state: RootState) => state.auth);
@@ -21,26 +21,22 @@ export default function UserMenu() {
   if (!user) return null;
 
   const handleSignOut = () => {
-    signOut({ callbackUrl: "/auth/signin" });
-  };
-
-  const getInitials = (name: string) => {
-    return name
-      .split(" ")
-      .map((n) => n[0])
-      .join("")
-      .toUpperCase()
-      .slice(0, 2);
+    signOut({
+      callbackUrl: "/login",
+    });
   };
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="relative h-10 w-10 rounded-full">
+        <Button
+          variant="ghost"
+          className="relative h-10 w-10 rounded-full cursor-pointer"
+        >
           <Avatar className="h-10 w-10">
             <AvatarImage src={user.image || ""} alt={user.name} />
             <AvatarFallback className="bg-primary/10 text-primary font-medium">
-              {getInitials(user.name)}
+              {user.name}
             </AvatarFallback>
           </Avatar>
         </Button>
@@ -54,15 +50,6 @@ export default function UserMenu() {
             </p>
           </div>
         </DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem className="cursor-pointer">
-          <User className="mr-2 h-4 w-4" />
-          <span>Profile</span>
-        </DropdownMenuItem>
-        <DropdownMenuItem className="cursor-pointer">
-          <Settings className="mr-2 h-4 w-4" />
-          <span>Settings</span>
-        </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem
           className="cursor-pointer text-red-600"
