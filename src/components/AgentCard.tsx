@@ -25,7 +25,6 @@ export default function AgentCard({ agent, index }: AgentCardProps) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3, delay: index * 0.1 }}
       whileHover={{ y: -4, transition: { duration: 0.2 } }}
-      className=""
     >
       <Card className="h-full hover:shadow-lg transition-shadow duration-200  hover:border-primary/20">
         <CardHeader>

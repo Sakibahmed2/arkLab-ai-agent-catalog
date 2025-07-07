@@ -1,9 +1,14 @@
 import HomePage from "@/components/page/HomePage";
+import ProtectedRoutes from "@/lib/ProtectedRoutes";
 
-export default async function Page() {
+const App = () => {
   return (
     <main className="p-6 max-w-7xl mx-auto">
-      <HomePage />
+      <ProtectedRoutes>
+        <HomePage />
+      </ProtectedRoutes>
     </main>
   );
-}
+};
+
+export default App;

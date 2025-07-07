@@ -19,3 +19,10 @@ export type TFilterValues = {
   selectedCategories: string[];
   selectedPricingModels: string;
 };
+
+export type TUser = {
+  id: string;
+  name: string;
+  email: string;
+  image?: string;
+};

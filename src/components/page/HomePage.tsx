@@ -3,7 +3,7 @@
 import FilterPanel from "@/components/FilterPanel";
 import SearchBar from "@/components/SearchBar";
 import agentData from "@/data/mock-agent.json";
-import { useAppDispatch } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { setAgents, setLoading } from "@/redux/slice/agentSlice";
 import { TAgents } from "@/types/global";
 import { motion } from "framer-motion";
@@ -52,6 +52,9 @@ const agentInfoAnimation = {
 
 const HomePage = () => {
   const dispatch = useAppDispatch();
+  const { user } = useAppSelector((state) => state.auth);
+
+  console.log(user);
 
   useEffect(() => {
     dispatch(setLoading(true));
